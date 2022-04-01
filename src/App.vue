@@ -10,6 +10,9 @@ export default {
   name: 'App',
   components: {
     HelloWorld
+  },
+  mounted() {
+    console.log('fyb/20220401/test3')
   }
 }
 </script>
