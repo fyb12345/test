@@ -1,40 +1,50 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <tab></tab>
     <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
+      编辑器
     </p>
-    <h3>Installed CLI Plugins</h3>
+    <input v-model="text" type="text" @keyup.enter="onSubmit">
     <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
+      <li v-for="(item,index) in list" v-bind:key="item.Date">{{index+1}}---{{item.text}}---{{item.Date}}</li>
     </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+    <footerTab></footerTab>
   </div>
 </template>
 
 <script>
+import { tab } from '@/components'
+import qs from "qs"
+import footerTab from "@/components/footer/footer";
+
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  components:{
+    tab,
+    footerTab
+  },
+  data(){
+    return{
+      text:"",
+      list:[],
+    }
+  },
+  mounted() {
+
+    let string = 'a[b][c][d][e][f][g][h][i]=j';
+    console.log(qs.parse(string))
+  },
+  methods:{
+    onSubmit(){
+      this.list.push({
+        text:this.text,
+        Date:new Date()
+      })
+    }
   }
 }
 </script>
@@ -49,8 +59,8 @@ ul {
   padding: 0;
 }
 li {
-  display: inline-block;
-  margin: 0 10px;
+  display: block;
+  margin:  10px;
 }
 a {
   color: #42b983;
